@@ -150,10 +150,12 @@ class PointSourceParam(object):
                         args.append(a)
         return args
 
-    def num_param(self):
+    def num_param(self, latex_style=False):
         """
         number of parameters and their names
 
+        :param latex_style: boolean;
+            if True returns (if available) latex text strings instead of the sampler-identified text string.
         :return: int, list of parameter names
         """
         num = 0

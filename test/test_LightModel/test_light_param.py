@@ -93,6 +93,9 @@ class TestParam(object):
         num, list = self.param.num_param()
         assert num == (66+1200)
 
+        num, latex_list = self.param.num_param(latex_style=True)
+        assert num == (66 + 1200)
+
     def test_param_name_list(self):
         param_name_list = self.param.param_name_list
         assert param_name_list[0][0] == 'amp'

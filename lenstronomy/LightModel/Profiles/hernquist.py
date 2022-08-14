@@ -10,7 +10,7 @@ class Hernquist(object):
     def __init__(self):
         from lenstronomy.LensModel.Profiles.hernquist import Hernquist as Hernquist_lens
         self.lens = Hernquist_lens()
-        self.param_names_latex = {r'$I_0$', r'$R-s$', r'$x_0$', r'$y_0$'}
+        self.param_names_latex = [r'$I_0$', r'$R-s$', r'$x_0$', r'$y_0$']
         self.param_names = ['amp', 'Rs', 'center_x', 'center_y']
         self.lower_limit_default = {'amp': 0, 'Rs': 0, 'center_x': -100, 'center_y': -100}
         self.upper_limit_default = {'amp': 100, 'Rs': 100, 'center_x': 100, 'center_y': 100}
@@ -46,6 +46,7 @@ class HernquistEllipse(object):
     class for elliptical pseudo Jaffe lens light (2d projected light/mass distribution
     """
     param_names = ['amp', 'Rs', 'e1', 'e2', 'center_x', 'center_y']
+    param_names_latex = [r'$I_0$', r'$R-s$', r'e_1', r'e_2', r'$x_0$', r'$y_0$']
     lower_limit_default = {'amp': 0, 'Rs': 0, 'e1': -0.5, 'e2': -0.5, 'center_x': -100, 'center_y': -100}
     upper_limit_default = {'amp': 100, 'Rs': 100, 'e1': 0.5, 'e2': 0.5, 'center_x': 100, 'center_y': 100}
 

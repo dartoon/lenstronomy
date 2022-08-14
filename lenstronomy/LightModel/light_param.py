@@ -24,6 +24,7 @@ class LightParam(object):
         """
         self._lightModel = LightModel(light_model_list=light_model_list)
         self._param_name_list = self._lightModel.param_name_list
+        self._param_name_list_latex = self._lightModel.param_name_list_latex
         self._type = param_type
         self.model_list = light_model_list
         self.kwargs_fixed = kwargs_fixed
@@ -155,8 +156,13 @@ class LightParam(object):
             kwargs_fixed = self.kwargs_fixed[k]
             # TODO latex name list also iterate through
             param_names = self._param_name_list[k]
-            for name in param_names:
+            param_names_latex = self._param_name_list_latex[k]
+            for name_index, name in enumerate(param_names):
                 if name not in kwargs_fixed:
+                    if latex_style is True:
+                        name_string = param_names_latex[name_index]
+                    else:
+                        name_string = name
                     if model in ['SHAPELETS', 'SHAPELETS_POLAR', 'SHAPELETS_POLAR_EXP'] and name == 'amp':
                         if 'n_max' not in kwargs_fixed:
                             raise ValueError("n_max needs to be fixed in this configuration!")
@@ -167,7 +173,7 @@ class LightParam(object):
                             num_param = int((n_max + 1) * (n_max + 2) / 2)
                         num += num_param
                         for i in range(num_param):
-                            name_list.append(add_string_index(name, k, self._type, latex_style=latex_style))
+                            name_list.append(add_string_index(name_string, k, self._type, latex_style=latex_style))
                     elif model in ['SLIT_STARLETS', 'SLIT_STARLETS_GEN2'] and name == 'amp':
                         if 'n_scales' not in kwargs_fixed or 'n_pixels' not in kwargs_fixed:
                             raise ValueError("n_scales and n_pixels need to be fixed when using STARLETS-like models!")
@@ -176,15 +182,15 @@ class LightParam(object):
                         num_param = n_scales * n_pixels
                         num += num_param
                         for i in range(num_param):
-                            name_list.append(add_string_index(name, k, self._type, latex_style=latex_style))
+                            name_list.append(add_string_index(name_string, k, self._type, latex_style=latex_style))
                     elif model in ['MULTI_GAUSSIAN', 'MULTI_GAUSSIAN_ELLIPSE'] and name == 'amp':
                         num_param = len(kwargs_fixed['sigma'])
                         num += num_param
                         for i in range(num_param):
-                            name_list.append(add_string_index(name, k, self._type, latex_style=latex_style))
+                            name_list.append(add_string_index(name_string, k, self._type, latex_style=latex_style))
                     else:
                         num += 1
-                        name_list.append(add_string_index(name, k, self._type, latex_style=latex_style))
+                        name_list.append(add_string_index(name_string, k, self._type, latex_style=latex_style))
         return num, name_list
 
     def num_param_linear(self):

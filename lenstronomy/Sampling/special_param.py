@@ -189,9 +189,11 @@ class SpecialParam(object):
                 args.append(kwargs_special['delta_y_source_grid'])
         return args
 
-    def num_param(self):
+    def num_param(self, latex_style=False):
         """
 
+        :param latex_style: boolean;
+            if True returns (if available) latex text strings instead of the sampler-identified text string.
         :return: integer, number of free parameters sampled (and managed) by this class, parameter names (list of strings)
         """
         num = 0
